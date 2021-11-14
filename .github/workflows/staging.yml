@@ -32,5 +32,5 @@ jobs:
           git fetch --unshallow
           git checkout staging
           git pull
-          git merge "origin/${{ steps.branch-name.outputs.current_branch }}"
+          git merge "origin/${{ steps.branch_name.outputs.current_branch }}"
           git push
