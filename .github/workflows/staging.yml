@@ -1,0 +1,36 @@
+name: Deploy to staging
+
+on:
+  pull_request:
+    types: [labeled]
+
+jobs:
+  deploy:
+    if: ${{ github.event.label.name == 'deploy' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get branch name.
+        id: branch_name
+        uses: tj-actions/branch-names@v5
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set Git config
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "Github Actions"
+
+      - name: Running on a pull request branch.
+        run: |
+          echo "Running on pr: ${{ steps.branch_name.outputs.current_branch }}"
+
+      - name: Merge to staging
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          git fetch --unshallow
+          git checkout staging
+          git pull
+          git merge "origin/${{ steps.branch_name.outputs.current_branch }}"
+          git push
