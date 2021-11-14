@@ -24,6 +24,7 @@ jobs:
       - name: Running on a pull request branch.
         run: |
           echo "Running on pr: ${{ steps.branch-name.outputs.current_branch }}"
+          echo "$(git symbolic-ref --short HEAD)"
 
       - name: Merge to staging
         env:
@@ -32,5 +33,5 @@ jobs:
           git fetch --unshallow
           git checkout staging
           git pull
-          git merge "origin/${{ steps.branch_name.outputs.current_branch }}"
+          git merge "origin/$(git symbolic-ref --short HEAD)"
           git push
