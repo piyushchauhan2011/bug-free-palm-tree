@@ -20,5 +20,4 @@ jobs:
 
       - name: Merge to staging
         run: |
-          current_branch=$(git branch --show-current)
-          echo $current_branch
+          echo $(git branch --show-current)
