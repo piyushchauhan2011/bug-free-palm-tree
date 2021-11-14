@@ -25,4 +25,11 @@ jobs:
         if: steps.branch-name.outputs.is_default == 'false'
         run: |
           echo "Running on pr: ${{ steps.branch-name.outputs.current_branch }}"
-        # Outputs: "Running on pr: feature/test".
+
+      - name: Merge to staging
+        run: |
+          git fetch --unshallow
+          git checkout staging
+          git pull
+          git merge ${{ steps.branch-name.outputs.current_branch }}
+          git push
