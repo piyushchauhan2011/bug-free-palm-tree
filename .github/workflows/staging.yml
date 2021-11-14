@@ -21,6 +21,7 @@ jobs:
       - name: Merge to staging
         run: |
           current_branch=$(git branch --show-current)
+          git fetch --unshallow
           git checkout staging
           git pull
           git merge current_branch
