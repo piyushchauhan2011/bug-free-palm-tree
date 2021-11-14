@@ -18,6 +18,10 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions"
 
+      - name: Get Branch name
+        uses: nelonoel/branch-name@v1.0.1
+        run: echo ${BRANCH_NAME}
+
       - name: Branch name
         run: echo running on branch ${GITHUB_REF##*/}
 
