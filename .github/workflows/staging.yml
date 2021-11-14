@@ -20,8 +20,4 @@ jobs:
 
       - name: Merge to staging
         run: |
-          git fetch --unshallow
-          git checkout staging
-          git pull
-          git merge ${GITHUB_REF##*/}
-          git push
+          echo ${GITHUB_REF##*/}
