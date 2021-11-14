@@ -22,7 +22,6 @@ jobs:
           git config --local user.name "Github Actions"
 
       - name: Running on a pull request branch.
-        if: steps.branch-name.outputs.is_default == 'false'
         run: |
           echo "Running on pr: ${{ steps.branch-name.outputs.current_branch }}"
 
