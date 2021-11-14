@@ -18,6 +18,15 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions"
 
+      - name: Branch name
+        run: echo running on branch ${GITHUB_REF##*/}
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
       - name: Merge to staging
         run: |
           echo ${GITHUB_REF##*/}
+          echo ${{ steps.extract_branch.outputs.branch }}
