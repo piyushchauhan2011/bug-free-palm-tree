@@ -1,0 +1,27 @@
+name: Deploy to staging
+
+on:
+  pull_request:
+    types: [labeled]
+
+jobs:
+  deploy:
+    if: ${{ github.event.label.name == 'deploy' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Set Git config
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "Github Actions"
+
+      - name: Merge to staging
+        run: |
+          git fetch --unshallow
+          git checkout staging
+          git pull
+          git merge ${GITHUB_REF##*/}
+          git push
