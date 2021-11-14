@@ -25,5 +25,5 @@ jobs:
           git fetch --unshallow
           git checkout staging
           git pull
-          git merge feature/merge-to-staging-actions-script
+          git merge origin/feature/merge-to-staging-actions-script
           git push
