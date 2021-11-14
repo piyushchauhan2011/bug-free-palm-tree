@@ -19,7 +19,7 @@ jobs:
           git config --local user.name "Github Actions"
 
       - name: Get Branch name
-        uses: nelonoel/branch-name@v1.0.1
+        uses: nelonoel/branch-name@v1
         run: echo ${BRANCH_NAME}
 
       - name: Branch name
